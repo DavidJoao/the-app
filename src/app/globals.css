@@ -2,20 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@layer components {
+ .App {
+   @apply flex flex-col items-center justify-center h-screen p-2 md:p-0
+ }
+ .main-title{
+   @apply text-[50px] font-extrabold mb-4
+ }
+ .form {
+   @apply flex flex-col p-2 md:p-5 gap-2 items-center justify-center
+ }
+ .input {
+   @apply rounded p-1 border-[2px] w-[95%] md:w-full
+ }
+ .blue-button {
+   @apply bg-[#4787FF] hover:bg-[#6C9FFF] rounded p-1 mt-1 mb-1 text-white font-bold w-[300px] md:w-full
+ }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+.App{
+ background: #E2D9CE;
 }

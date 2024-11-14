@@ -1,7 +1,9 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { registerUser } from '@/app/lib/actions/auth'
 import { navigate } from '@/app/lib/redirect'
+import Link from 'next/link'
+import { logSession } from '@/app/lib/actions/session'
 
 const Signup = () => {
 
@@ -15,6 +17,7 @@ const Signup = () => {
   const [form, setForm] = useState(initialForm)
   const [errorMsg, setErrorMsg] = useState('')
   const [successMsg, setSuccessMsg] = useState('')
+  const [session, setSession] = useState(null)
 
   const handleChange = (e) => {
     const { name, value} = e.target;
@@ -40,9 +43,25 @@ const Signup = () => {
       .catch(err => console.log(err))
   }
 
+  useEffect(() => {
+    const checkSession = async () => {
+      try {
+        const userSession = await logSession();
+        setSession(userSession); 
+
+        if (userSession) {
+          navigate('/pages/home');
+        }
+      } catch (error) {
+        console.error("Error fetching session", error);
+      }
+    };
+    checkSession();
+  }, [navigate]);
+
   return (
     <div className='App'>
-      <h1 className="main-title">The App</h1>
+      <Link href={'/'} className="main-title">The App</Link>
       <form className='form w-[40%] auto rounded-lg shadow-xl bg-white' onSubmit={handleSubmit}>
         <label>Email</label>
         <input required name='email' value={form.email} className='input' onChange={handleChange}/>

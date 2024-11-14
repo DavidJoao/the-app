@@ -1,5 +1,7 @@
 'use client'
 import React, { useState } from 'react'
+import { registerUser } from '@/app/lib/actions/auth'
+import { navigate } from '@/app/lib/redirect'
 
 const Signup = () => {
 
@@ -11,6 +13,8 @@ const Signup = () => {
   }
 
   const [form, setForm] = useState(initialForm)
+  const [errorMsg, setErrorMsg] = useState('')
+  const [successMsg, setSuccessMsg] = useState('')
 
   const handleChange = (e) => {
     const { name, value} = e.target;
@@ -20,19 +24,38 @@ const Signup = () => {
     })
   }
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setErrorMsg("")
+    registerUser(form) 
+      .then(res => {
+        if (res.status === 200) {
+          setSuccessMsg("Account Created Successfully, Redirecting to Login...")
+          setTimeout(() => {
+            navigate('/login')
+          }, 3000)
+        }
+        if (res?.msg?.status === 500) setErrorMsg('Email already in use')
+      })
+      .catch(err => console.log(err))
+  }
+
   return (
     <div className='App'>
-      <form className='form w-[40%] auto rounded-lg shadow-xl bg-white'>
+      <h1 className="main-title">The App</h1>
+      <form className='form w-[40%] auto rounded-lg shadow-xl bg-white' onSubmit={handleSubmit}>
         <label>Email</label>
-        <input name='email' value={form.email} className='input' onChange={handleChange}/>
+        <input required name='email' value={form.email} className='input' onChange={handleChange}/>
         <label>Name</label>
-        <input name='name' value={form.name} className='input' onChange={handleChange}/>
+        <input required name='name' value={form.name} className='input' onChange={handleChange}/>
         <label>Password</label>
-        <input name='password' value={form.password} type='password' className='input' onChange={handleChange}/>
+        <input required name='password' value={form.password} type='password' className='input' onChange={handleChange}/>
         <label>Confirm Password</label>
-        <input name='confirmPassword' value={form.confirmPassword} type='password' className='input' onChange={handleChange}/>
-        <button className='blue-button' disabled={form.password === form.confirmPassword && form.password != '' ? false : true}>Sign Up</button>
+        <input required name='confirmPassword' value={form.confirmPassword} type='password' className='input' onChange={handleChange}/>
+        <button type='submit' className='blue-button' disabled={form.password === form.confirmPassword && form.password != '' ? false : true}>Sign Up</button>
         <p className='text-red-500'>{form.password !== form.confirmPassword  ? 'Passwords do not match' : ''}</p>
+        <p className='text-red-500 font-bold'>{errorMsg}</p>
+        <p className='text-green-500 font-bold'>{successMsg}</p>
       </form>
     </div>
   )

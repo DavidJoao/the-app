@@ -6,6 +6,8 @@ import axios from "axios"
 import { blockUsers, unblockUsers, deleteUsers } from "@/app/lib/actions/user"
 import { logoutUser } from "@/app/lib/actions/session"
 import { useRouter } from "next/navigation"
+import ReactTimeago from "react-timeago"
+
 
 const Home = () => {
 	const session = useAuth()
@@ -112,8 +114,8 @@ const Home = () => {
 									</td>
 									<td className={ user?.status === 'blocked' ? 'text-gray-300 line-through py-3 px-6' : "py-3 px-6"}>{user?.name}</td>
 									<td className={ user?.status === 'blocked' ? 'text-gray-300 line-through py-3 px-6' : "py-3 px-6"}>{user?.email}</td>
-									<td className={ user?.status === 'blocked' ? 'text-gray-300 line-through py-3 px-6' : "py-3 px-6"}>{user?.lastLogin}</td>
-									<td className={ user?.status === 'blocked' ? 'text-gray-300 line-through py-3 px-6' : "py-3 px-6"}>{user?.lastActivity}</td>
+                                    <td><ReactTimeago className={ user?.status === 'blocked' ? 'text-gray-300 line-through py-3 px-6' : "py-3 px-6"} date={user?.lastLogin}/></td>
+									<td><ReactTimeago className={ user?.status === 'blocked' ? 'text-gray-300 line-through py-3 px-6' : "py-3 px-6"} date={user?.lastActivity}></ReactTimeago></td>
 								</tr>
 							))}
 						</tbody>

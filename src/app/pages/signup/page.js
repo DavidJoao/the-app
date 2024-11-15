@@ -57,7 +57,7 @@ const Signup = () => {
       }
     };
     checkSession();
-  }, [navigate]);
+  }, []);
 
   return (
     <div className='App'>

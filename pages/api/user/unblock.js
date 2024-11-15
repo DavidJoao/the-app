@@ -1,6 +1,6 @@
 import { prismaClient } from "@/app/lib/prismaClient"
 
-export default async function (req, res) {
+export default async function unblockUsers (req, res) {
     const users = req.body;
     try {
         const response = await prismaClient.user.updateMany({ 

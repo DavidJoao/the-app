@@ -1,6 +1,6 @@
 import { prismaClient } from "@/app/lib/prismaClient";
 
-export default async function (req, res) {
+export default async function updateLastLogin (req, res) {
     const { email } = req.query;
     const foundUser = await prismaClient.user.findUnique({ where: { email: email } })
     if (foundUser.status === 'blocked') {

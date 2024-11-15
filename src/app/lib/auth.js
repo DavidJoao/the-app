@@ -20,10 +20,19 @@ export const { handlers, signIn, signOut, auth } =  NextAuth({
             },
             authorize: async (credentials) => {
                 if (!credentials?.email || !credentials?.password) {
-                    throw new Error("Invalid credentials");
+                    const error = new Error()
+                    error.status = 400;
+                    error.message = "Invalid Credentials"
+                    throw error;
                 }
 
                 const existingUser = await db.user.findUnique({ where: { email: credentials?.email } });
+                if (existingUser?.status === 'blocked'){
+                    const error = new Error()
+                    error.status = 400;
+                    error.message = "Account Blocked"
+                    throw error;
+                }
                 if (!existingUser) return null;
 
                 const passwordMatch = await bcrypt.compare(credentials.password, existingUser.password);

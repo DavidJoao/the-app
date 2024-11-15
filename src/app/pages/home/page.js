@@ -7,6 +7,7 @@ import { blockUsers, unblockUsers, deleteUsers } from "@/app/lib/actions/user"
 import { logoutUser } from "@/app/lib/actions/session"
 import { useRouter } from "next/navigation"
 import ReactTimeago from "react-timeago"
+import { block, trash, unblock } from "@/app/lib/icons"
 
 
 const Home = () => {
@@ -89,9 +90,9 @@ const Home = () => {
 			<div className="p-3 mt-[50px]">
 				<p className="sub-title">Dashboard</p>
 				<div className="flex flex-col md:flex-row gap-4 mb-4 mt-4">
-					<button className={selectedUsers?.length < 1 ? `inactive-button` : `bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 rounded`} disabled={selectedUsers?.length < 1 ? true : false} onClick={handleDeleteUsers}> Delete Users</button>
-					<button className={selectedUsers?.length < 1 ? `inactive-button` : `bg-gray-500 hover:bg-gray-400 text-white font-bold py-2 px-4 rounded`} disabled={selectedUsers?.length < 1 ? true : false}  onClick={handleBlockUsers}>Block Users</button>
-					<button className={selectedUsers?.length < 1 ? `inactive-button` : `bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded`} disabled={selectedUsers?.length < 1 ? true : false} onClick={handleUnblockUsers}>Unblock Users</button>
+					<button className={selectedUsers?.length < 1 ? `inactive-button` : `bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 rounded`} disabled={selectedUsers?.length < 1 ? true : false} onClick={handleDeleteUsers}> {trash} </button>
+					<button className={selectedUsers?.length < 1 ? `flex flex-row inactive-button` : `flex flex-row bg-gray-500 hover:bg-gray-400 text-white font-bold py-2 px-4 rounded`} disabled={selectedUsers?.length < 1 ? true : false}  onClick={handleBlockUsers}>Block {block}</button>
+					<button className={selectedUsers?.length < 1 ? `inactive-button` : `bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded`} disabled={selectedUsers?.length < 1 ? true : false} onClick={handleUnblockUsers}>{unblock}</button>
 				</div>
 				<div className="overflow-x-auto w-full">
 					<table className="min-w-full bg-white rounded-lg shadow-md">

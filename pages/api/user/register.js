@@ -1,13 +1,11 @@
 const bcrypt = require("bcrypt")
-import { PrismaClient } from "@prisma/client"
-
-const prisma = new PrismaClient()
+import { prismaClient } from "@/app/lib/prismaClient"
 
 export default async function POST(request, response) {
 	try {
 		const form = await request.body
 		const hash = await bcrypt.hash(form.password, 10)
-		await prisma.user.create({
+		await prismaClient.user.create({
 			data: {
 				name: form.name,
 				email: form.email,

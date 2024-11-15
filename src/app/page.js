@@ -1,10 +1,13 @@
 'use client'
+import { useEffect } from "react"
 import { navigate } from "./lib/redirect"
 
 export default function Home() {
 
-	navigate('/pages/login')
-
+	useEffect(() => {
+		navigate('/pages/login')
+	}, [])
+	
 	return (
 		<div className="App">
 		</div>

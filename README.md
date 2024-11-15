@@ -49,3 +49,7 @@ One of the example accounts:
 
 ## Unique Indexation Proof
 ![unique Index](./assets/uniqueindex.png)
+
+## YouTube Video
+
+[![YouTube Video](./assets/yt.png)](https://www.youtube.com/watch?v=pBWffjhOg3w)

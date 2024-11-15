@@ -41,12 +41,12 @@ const Signup = () => {
             navigate('/pages/login')
           }, 2000)
         }
-        setButtonText(spinner)
+        setButtonText("Sign Up")
         if (res?.msg?.status === 500) setErrorMsg('Email already in use')
       })
       .catch(err => {
         console.log(err)
-        setButtonText(spinner)
+        setButtonText("Sign Up")
       })
   }
 

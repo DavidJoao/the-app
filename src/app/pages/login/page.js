@@ -6,6 +6,7 @@ import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { navigate } from '@/app/lib/redirect'
 import { logSession } from '@/app/lib/actions/session'
+import { updateLastLogin } from '@/app/lib/actions/user'
 
 const Login = () => {
 
@@ -33,6 +34,7 @@ const Login = () => {
 		setErrorMsg("")
 
 		try {
+			await updateLastLogin(`${form?.email}`)
 			await signIn("credentials", {
 				email: form.email,
 				password: form.password,

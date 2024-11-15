@@ -7,7 +7,10 @@
    @apply flex flex-col items-center justify-center h-screen p-2 md:p-0
  }
  .main-title{
-   @apply text-[50px] font-extrabold mb-4
+   @apply text-[50px] font-extrabold mb-4 text-white
+ }
+ .sub-title{
+   @apply text-[35px] font-extrabold mb-4
  }
  .form {
    @apply flex flex-col p-2 md:p-5 gap-2 items-center justify-center
@@ -18,8 +21,11 @@
  .blue-button {
    @apply bg-[#4787FF] hover:bg-[#6C9FFF] rounded p-1 mt-1 mb-1 text-white font-bold w-[300px] md:w-full
  }
+ .small-black-button {
+   @apply bg-[#00000] hover:bg-[#6C9FFF] rounded p-1 mt-1 mb-1 text-white font-bold w-auto
+ }
 }
 
 .App{
- background: #E2D9CE;
+ background: #727272;
 }

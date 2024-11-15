@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Getting Started: The App ( ITransition Task #4)
 
-## Getting Started
+## Open [The App](https://the-app-chi.vercel.app/) with your browser to see the result.
 
-First, run the development server:
+One of the example accounts:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+ - Email: example1@gmail.com 
+ - Password: 123
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Technologies Used
+ - React
+    - Next.js
+    - Next/auth (jwt auth)
+ - HTML
+ - CSS
+    - TailwindCSS
+ - Node.js
+ - PostgreSQL
+    - Hosted in Neon PostgreSQL
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## User Stories
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- As an User, I want to signup/login in the website.
+- As an User, I want to access the web application through my phone and computer.
+- As an User, I want to use short password, even with one character.
+- As an User, I want to have a dashboard with functions such as block/unblock other users and delete them.
+- As an User, I want to be able to terminate my session by logging out.
 
-## Learn More
+## Developer Requirements
 
-To learn more about Next.js, take a look at the following resources:
+- Add unique index to database;
+- Propierties: Unique index (email), encrypted password, last activity, last login, name.
+- Table should look like a table, and toolbar like a toolbar.
+- Multiple selection with checkboxes, as well as "Select All" option.
+- Check before logging in for deleted/blocked account.
+- Dashboard only accessible by authenticated users.
+- All users should be able to delete themselves or other users.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Screenshots
 
-## Deploy on Vercel
+![login page](./assets/loginpage.png)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+![signup page](./assets/signuppage.png)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+![dashboard page](./assets/dashboard.png)
+
+![user selected dashboard](./assets/onselectdashboard.png)
+
+## Unique Indexation Proof
+![unique Index](./assets/uniqueindex.png)

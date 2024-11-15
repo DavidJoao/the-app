@@ -24,6 +24,9 @@
  .small-black-button {
    @apply bg-[#00000] hover:bg-[#6C9FFF] rounded p-1 mt-1 mb-1 text-white font-bold w-auto
  }
+ .inactive-button {
+  @apply bg-gray-300 text-white font-bold py-2 px-4 rounded
+ }
 }
 
 .App{

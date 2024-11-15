@@ -6,7 +6,7 @@ import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { navigate } from '@/app/lib/redirect'
 import { logSession } from '@/app/lib/actions/session'
-import { updateLastLogin } from '@/app/lib/actions/user'
+import { updateLastActivity, updateLastLogin } from '@/app/lib/actions/user'
 
 const Login = () => {
 
@@ -34,23 +34,20 @@ const Login = () => {
 		setErrorMsg("")
 
 		try {
+			await updateLastActivity(`${form?.email}`)
 			await updateLastLogin(`${form?.email}`)
-			await signIn("credentials", {
+			const res = await signIn ("credentials", {
 				email: form.email,
 				password: form.password,
 				redirect: false,
 			})
-			.then(res => {
-                console.log(res)
-                if (res.error === null){
-                    navigate('/pages/home')
-                }
-                if (res.error) setErrorMsg('Email or password are incorrect')
-            })
-			.catch(err => console.log(err))
+			if (res.error === null) {
+				navigate('/pages/home');
+			} 
 			router.refresh();
 		} catch (error) {
-			console.log(error)
+			if (error.status === 500) setErrorMsg('Email or password are incorrect');
+			if (error.status === 400) setErrorMsg(error?.response?.data?.error);
 		}
 	}
 

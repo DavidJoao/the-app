@@ -35,7 +35,7 @@ const Signup = () => {
         if (res.status === 200) {
           setSuccessMsg("Account Created Successfully, Redirecting to Login...")
           setTimeout(() => {
-            navigate('/login')
+            navigate('/pages/login')
           }, 3000)
         }
         if (res?.msg?.status === 500) setErrorMsg('Email already in use')

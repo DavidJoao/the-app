@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation"
 import { navigate } from '@/app/lib/redirect'
 import { logSession } from '@/app/lib/actions/session'
 import { updateLastActivity, updateLastLogin } from '@/app/lib/actions/user'
+import { spinner } from '@/app/lib/icons'
 
 const Login = () => {
 
@@ -20,6 +21,7 @@ const Login = () => {
 	const [form, setForm] = useState(initialForm)
 	const [errorMsg, setErrorMsg] = useState("")
     const [session, setSession] = useState(null)
+	const [buttonText, setButtonText] = useState("Log In")
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -32,6 +34,7 @@ const Login = () => {
 	const handleLogin = async (e) => {
 		e.preventDefault()
 		setErrorMsg("")
+		setButtonText(spinner)
 
 		try {
 			await updateLastActivity(`${form?.email}`)
@@ -44,10 +47,12 @@ const Login = () => {
 			if (res.error === null) {
 				navigate('/pages/home');
 			} 
+			setButtonText("Log In")
 			router.refresh();
 		} catch (error) {
 			if (error.status === 500) setErrorMsg('Email or password are incorrect');
 			if (error.status === 400) setErrorMsg(error?.response?.data?.error);
+			setButtonText("Log In")
 		}
 	}
 
@@ -73,11 +78,12 @@ const Login = () => {
 			<Link href={'/'} className="main-title">The App</Link>
 			<div className="w-full md:w-[40%] h-[400px] rounded-lg shadow-xl bg-white">
 				<form className="form" onSubmit={handleLogin}>
+					<h1 className="text-[30px] border-b-[1px] w-full text-center mb-3">Login</h1>
 					<label>Email:</label>
 					<input required name="email" value={form.email} className="input" onChange={handleChange}/>
 					<label>Password:</label>
 					<input required type="password" name="password" value={form.password} className="input" onChange={handleChange}/>
-					<button type="submit" className="blue-button">Log In</button>
+					<button type="submit" className="blue-button flex items-center justify-center text-white">{buttonText}</button>
 					<p className="mx-auto">or</p>
 					<Link href={"/pages/signup"} className="underline underline-offset-4 mx-auto"> Create an account </Link>
 					<p className="text-red-500 font-bold">{errorMsg}</p>

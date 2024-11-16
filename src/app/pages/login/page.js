@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useContext } from 'react'
 import { signIn } from "next-auth/react"
 import Link from "next/link"
 import { useState, useEffect } from "react"
@@ -8,9 +8,11 @@ import { navigate } from '@/app/lib/redirect'
 import { logSession } from '@/app/lib/actions/session'
 import { updateLastActivity, updateLastLogin } from '@/app/lib/actions/user'
 import { spinner } from '@/app/lib/icons'
+import { useAppContext } from '@/app/components/context/provider'
 
 const Login = () => {
 
+	const { appNotification, setAppNotification } = useAppContext()
     const router = useRouter();
 
 	const initialForm = {
@@ -35,7 +37,8 @@ const Login = () => {
 		e.preventDefault()
 		setErrorMsg("")
 		setButtonText(spinner)
-
+		setAppNotification("")
+		
 		try {
 			await updateLastActivity(`${form?.email}`)
 			await updateLastLogin(`${form?.email}`)
@@ -86,7 +89,7 @@ const Login = () => {
 					<button type="submit" className="blue-button flex items-center justify-center text-white">{buttonText}</button>
 					<p className="mx-auto">or</p>
 					<Link href={"/pages/signup"} className="underline underline-offset-4 mx-auto"> Create an account </Link>
-					<p className="text-red-500 font-bold">{errorMsg}</p>
+					<p className="text-red-500 font-bold">{ appNotification !== '' ? appNotification : errorMsg}</p>
 				</form>
 			</div>
 		</div>

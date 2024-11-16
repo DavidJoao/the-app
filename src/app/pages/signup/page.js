@@ -5,8 +5,11 @@ import { navigate } from '@/app/lib/redirect'
 import Link from 'next/link'
 import { logSession } from '@/app/lib/actions/session'
 import { spinner } from '@/app/lib/icons'
+import { useAppContext } from '@/app/components/context/provider'
 
 const Signup = () => {
+
+  const { setAppNotification } = useAppContext()
 
   const initialForm = {
     email: '',
@@ -51,6 +54,7 @@ const Signup = () => {
   }
 
   useEffect(() => {
+    setAppNotification("")
     const checkSession = async () => {
       try {
         const userSession = await logSession();

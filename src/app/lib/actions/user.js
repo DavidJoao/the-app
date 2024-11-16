@@ -30,3 +30,8 @@ export async function unblockUsers ( users, email ) {
         .then(res => console.log(res))
         .catch(err => console.log(err))
 }
+
+export async function getStatus (email) {
+    const res = await axios.get(`/api/user/status/${email}`)
+    return res?.data?.status
+}

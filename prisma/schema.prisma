@@ -18,4 +18,5 @@ model User {
   registerTime      DateTime        @db.Timestamp()
 
   @@unique([email])
+  @@index([lastLogin])
 }

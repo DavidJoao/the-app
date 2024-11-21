@@ -2,7 +2,11 @@ import { prismaClient } from "@/app/lib/prismaClient";
 
 export default async function POST(request, response) {
 	try {
-        const users = await prismaClient.user.findMany();
+        const users = await prismaClient.user.findMany({ 
+			orderBy: {
+				lastLogin: 'desc'
+			}
+		});
 		const allUsers = users.map(user => {
 			const { password, ...userWithoutPassowrd } = user
 			return userWithoutPassowrd

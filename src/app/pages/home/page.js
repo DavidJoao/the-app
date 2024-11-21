@@ -177,7 +177,7 @@ const Home = () => {
                             </thead>
                             <tbody className="text-gray-600 text-sm font-light">
                                 {users?.filter((user) => filter === "" || user?.name.toLocaleLowerCase().includes(filter.toLocaleLowerCase()) || user?.email.toLocaleLowerCase().includes(filter.toLocaleLowerCase()))
-                                .sort((a, b) => new Date(b.lastLogin) - new Date(a.lastLogin)).map((user, index) => (
+                                .map((user, index) => (
                                     <tr key={index} className="border-b border-gray-200 hover:bg-gray-100 text-center">
                                         <td className="py-3 px-6">
                                             <input type="checkbox" checked={selectedUsers.includes(user?.user_id)} onChange={(e) => handleSelect(user?.user_id, e.target.checked)}/>
